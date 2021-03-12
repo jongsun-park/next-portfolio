@@ -49,7 +49,6 @@ export default function Home({ allPostsData }) {
 export async function getStaticProps() {
   // Get external data from the file system, API, DB, etc.
   const allPostsData = getSortedPostsData();
-
   // The value of the `props` key will be
   //  passed to the `Home` component
   return {
