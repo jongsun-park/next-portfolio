@@ -1,10 +1,8 @@
 import Layout from "../../components/layout";
 import Link from "next/link";
-import { getAllPost } from "../../lib/projects";
+import { getAllProject } from "../../lib/projects";
 
 export default function Projects({ total, posts }) {
-  console.log(total);
-  console.log(posts);
   return (
     <Layout>
       <h2>My Projects</h2>
@@ -27,7 +25,7 @@ export default function Projects({ total, posts }) {
 }
 
 export async function getStaticProps() {
-  const data = await getAllPost();
+  const data = await getAllProject();
   const { total, items: posts } = data;
   return {
     props: {

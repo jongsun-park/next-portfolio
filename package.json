@@ -21,6 +21,7 @@
     "redux-thunk": "^2.3.0",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
-    "sass": "^1.32.8"
+    "sass": "^1.32.8",
+    "styled-components": "^5.2.1"
   }
 }

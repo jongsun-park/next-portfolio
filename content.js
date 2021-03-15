@@ -2,22 +2,12 @@ export const content = {
   title: "Jongsun Park Portfolio - Frontend Developer",
   author: "Jongsun Park",
   email: "jongsun250@gmail.com",
+  github: "https://github.com/jongsun-park",
+  linkedin: "https://www.linkedin.com/in/jongsun-park/",
   phone: "087 388 3948",
   location: "Dundalk Co,Louth Ireland",
+  jobDescription:
+    "Web developer and designer specialized in UI & UX in mordern web.",
   description:
-    "Thanks you for visiting my website. I can make beatiful website built with Wordpress and Shopify. and design with adobe products. I really design with AdobeXD for design website. Check my current works! and welcome to contact me any time :)",
-  contact:
-    "If you need a modern and powerful website for your business, startup or personally, I am available for work.",
-  skills: [
-    {
-      title: "Development",
-      description:
-        "I design beautiful and powerful websites for modern businesses. Any business today needs a website that wins customers’ trust and helps you do your business well. I make sure your website is up to that standard.",
-    },
-    {
-      title: "Design",
-      description:
-        "I build websites in Webflow where I can create responsive, powerful and fully custom websites. Plus, Webflow has an incredibly simple Content Editor for you and your team to edit website content quickly and easily.",
-    },
-  ],
+    "I come from Daegu, a city in South Korea. I currently live in Ireland, in County Louth. I'm a self-taught web designer/developer and I'm highly capable working with both wordpress and shopify. (As well as custom coded pages!)",
 };
