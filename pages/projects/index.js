@@ -1,22 +1,24 @@
 import Layout from "../../components/layout";
-import { fetchEntries } from "../../lib/content";
+import Link from "next/link";
+import { getAllPost } from "../../lib/projects";
 
-export default function Projects({ posts }) {
+export default function Projects({ total, posts }) {
+  console.log(total);
   console.log(posts);
   return (
     <Layout>
-      {posts.map((p) => {
-        const { title, description, body, tags } = p;
+      <h2>My Projects</h2>
+      <small>Total: {total}</small>
+      {posts.map((post) => {
+        const { title, description } = post.fields;
+        const { id } = post.sys;
         return (
           <div key={title}>
             <h3>{title}</h3>
-            <div>
-              {tags.map((t) => (
-                <span key={`${title} - ${t}`}>{t} </span>
-              ))}
-            </div>
             <p>{description}</p>
-            <div dangerouslySetInnerHTML={{ __html: body }} />
+            <Link href={`/projects/${id}`}>
+              <a>Details</a>
+            </Link>
           </div>
         );
       })}
@@ -25,12 +27,11 @@ export default function Projects({ posts }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetchEntries();
-  const posts = await res.map((p) => {
-    return p.fields;
-  });
+  const data = await getAllPost();
+  const { total, items: posts } = data;
   return {
     props: {
+      total,
       posts,
     },
   };

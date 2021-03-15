@@ -91,8 +91,6 @@ const Contact = () => (
     <p>{contact}</p>
     location: {location}
     <br />
-    phone: {phone}
-    <br />
     email: {email}
   </section>
 );

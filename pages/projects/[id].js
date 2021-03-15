@@ -1,81 +1,37 @@
 import Head from "next/head";
 import Layout from "../../components/layout";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Image from "next/image";
-import Link from "next/link";
-import { fetchContentful } from "../../store";
-import remark from "remark";
-import html from "remark-html";
+import { getAllProjectIds, getProjectData } from "../../lib/projects";
+import MarkdownContent from "../../lib/md2html";
 
-// TODO
-// refresh -> invalidate post
-
-export default function Project() {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const [post, setPost] = useState();
-
-  const { id } = router.query;
-  const { data } = useSelector((state) => state.contentful);
-
-  useEffect(() => {
-    fetchContentful(dispatch);
-    setPost(data.filter((d) => d.sys.id === id)[0]);
-  }, []);
-
-  const md2html = (md) => {
-    let parsedString;
-    remark()
-      .use(html)
-      .process(md, function (err, file) {
-        parsedString = file.toString();
-      });
-    return parsedString;
-  };
-
-  md2html("## hello");
-
+export default function Project({ projectData }) {
+  const { title, description, body } = projectData.fields;
+  const { createdAt } = projectData.sys;
   return (
     <Layout>
       <Head>
-        <title></title>
+        <title>{title}</title>
       </Head>
-      <Link href="/">
-        <a>Go back Home</a>
-      </Link>
-      {!post ? (
-        <h2>Invalidable Post</h2>
-      ) : (
-        <article>
-          <h2>{post.fields.title}</h2>
-          <p>{post.sys.createdAt}</p>
-          <div>
-            {post.fields.tags.map((t) => (
-              <span key={t}>{t}</span>
-            ))}
-          </div>
-
-          <div
-            dangerouslySetInnerHTML={{
-              __html: md2html(post.fields.body),
-            }}
-          />
-
-          <a href={post.fields.url} target="_blank" rel="noreferrer noopener">
-            LIVE WEBSITE
-          </a>
-          {/* {post.fields.featuredImage && (
-            <Image
-              width="500"
-              height="500"
-              className="project__image"
-              src={`https:${post.fields.featuredImage.fields.file.url}`}
-            />
-          )} */}
-        </article>
-      )}
+      <article>
+        <h1>{title}</h1>
+        <time>{createdAt}</time>
+        <p>{description}</p>
+        <MarkdownContent>{body}</MarkdownContent>
+      </article>
     </Layout>
   );
+}
+
+export async function getStaticPaths() {
+  const paths = await getAllProjectIds();
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const projectData = await getProjectData(params.id);
+  return {
+    props: { projectData },
+  };
 }
