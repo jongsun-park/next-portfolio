@@ -2,6 +2,9 @@ import Head from "next/head";
 import Layout from "../../components/layout";
 import { getAllProjectIds, getProjectData } from "../../lib/projects";
 import MarkdownContent from "../../lib/md2html";
+import { PageContainer } from "../../styles/container";
+import styled from "styled-components";
+import Date from "../../components/date";
 
 export default function Project({ projectData }) {
   const { title, description, body } = projectData.fields;
@@ -11,12 +14,18 @@ export default function Project({ projectData }) {
       <Head>
         <title>{title}</title>
       </Head>
-      <article>
-        <h1>{title}</h1>
-        <time>{createdAt}</time>
-        <p>{description}</p>
-        <MarkdownContent>{body}</MarkdownContent>
-      </article>
+      <PageContainer>
+        <article>
+          <h1 className="page-title">{title}</h1>
+          <div className="page-date">
+            <Date dateString={createdAt} />
+          </div>
+          <div className="page-content">
+            <p>{description}</p>
+            <MarkdownContent>{body}</MarkdownContent>
+          </div>
+        </article>
+      </PageContainer>
     </Layout>
   );
 }

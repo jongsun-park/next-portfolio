@@ -4,15 +4,15 @@ import { Footer } from "./footer";
 
 export const siteTitle = "Jongsun Park | Portfolio";
 
-const Layout = ({ home, children }) => (
-  <>
+const Layout = ({ children }) => (
+  <div className="layout">
     <Head>
       <title>{siteTitle}</title>
     </Head>
     <Header />
-    {children}
+    <main>{children}</main>
     <Footer />
-  </>
+  </div>
 );
 
 export default Layout;

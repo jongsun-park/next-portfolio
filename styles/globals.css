@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
-:root{
-  --font-primary: 'Open Sans', sans-serif;
-  --font-secondary: 'Libre Baskerville', serif;
-  --color-default: #15110D;
-  --color-light:#F5F5F5;
-  --color-mint: #87999C;
-  --color-primary-light: #F0970B;
-  --color-primary: #EA6C2E;
-  --color-primary-dark: #923E22;
+:root {
+  --font-primary: "Open Sans", sans-serif;
+  --font-secondary: "Libre Baskerville", serif;
+  --color-default: #15110d;
+  --color-light: #f5f5f5;
+  --color-mint: #87999c;
+  --color-primary-light: #f0970b;
+  --color-primary: #ea6c2e;
+  --color-primary-dark: #923e22;
 }
 
 html,
-body {
+body,
+#__next {
   padding: 0;
   margin: 0;
   font-family: var(--font-primary);
@@ -20,20 +21,43 @@ body {
   font-size: 14px;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  height: 100%;
 }
 
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* scrollbar hidden */
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.layout main {
+  flex: 1;
+}
 /* Types */
-h1, h2{
+h1,
+h2 {
   font-family: var(--font-secondary);
   font-weight: bold;
 }
 
-h1 i, h2 i{
+h1 i,
+h2 i {
   font-family: var(--font-primary);
   font-style: italic;
 }
 
-h3, h4, h5{
+h3,
+h4,
+h5 {
   font-family: var(--font-primary);
   font-weight: bold;
 }
@@ -41,6 +65,7 @@ h3, h4, h5{
 * {
   box-sizing: border-box;
   position: relative;
+  margin: 0;
 }
 
 a {
