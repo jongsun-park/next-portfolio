@@ -3,6 +3,7 @@ import Layout from "../../components/layout";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Date from "../../components/date";
 import { PageContainer } from "../../styles/container";
+import { motion } from "framer-motion";
 
 export default function Post({ postData }) {
   return (
@@ -12,7 +13,9 @@ export default function Post({ postData }) {
       </Head>
       <PageContainer>
         <article>
-          <h1 className="page-title">{postData.title}</h1>
+          <motion.h1 className="page-title" layoutId={`${postData.id}_title`}>
+            {postData.title}
+          </motion.h1>
           <div className="page-date">
             <Date dateString={postData.date} />
           </div>

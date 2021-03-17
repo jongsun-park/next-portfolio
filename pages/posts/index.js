@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Date from "../../components/date";
 import Link from "next/link";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Pagination = ({ lastIndex, pageIndex, setPageIndex }) => {
   return (
@@ -48,9 +49,9 @@ export default function Posts({ postsData }) {
             const index2digit = index + 1 < 10 ? "0" + (index + 1) : index + 1;
             return (
               <div key={id} className="post-container">
-                <h3 className="post-title">
+                <motion.h3 className="post-title" layoutId={`${id}_title`}>
                   <span className="post-index">{index2digit}</span> {title}
-                </h3>
+                </motion.h3>
                 <div className="post-published">
                   <Date dateString={date} />
                 </div>

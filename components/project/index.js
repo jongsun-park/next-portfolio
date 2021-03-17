@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Container } from "../../styles/container";
 import { Button } from "../../styles/button";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const Project = ({ allProjectData }) => {
   return (
@@ -18,19 +19,21 @@ export const Project = ({ allProjectData }) => {
               key={id}
               className={index % 2 === 0 ? "image-text" : "text-image"}
             >
-              <div className="image-container">
+              <motion.div className="image-container" layoutId={`${id}_image`}>
                 <Image
                   src={`https:${thumbnail.fields.file.url}`}
                   width="700"
                   height="700"
                 />
-              </div>
+              </motion.div>
               <div className="text-container">
                 <p className="project__index">
                   {index < 10 && "0"}
                   {index + 1}
                 </p>
-                <h3 className="project__title">{title}</h3>
+                <motion.h3 className="project__title" layoutId={`${id}_title`}>
+                  {title}
+                </motion.h3>
                 <p className="project__description">{description}</p>
                 <Link href={`/projects/${id}`}>
                   <a>

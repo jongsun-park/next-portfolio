@@ -2144,3 +2144,174 @@ export const unpkgPathPlugin = (inputCode: string) => {
   // Handle main file of a module
   build.onResolve({ filter: /.*/ }, async (args: any) => {}
 ```
+
+## Refactoring to Multiple Plugins
+
+unpkg 에서 패키지 경로를 찾는 로직(onResolve)과 해당 경로의 모듈을 가져오는 로직(onLoad)을 분리한다.
+
+- unpkgPathPlugin.ts
+- fetch-plugin.ts
+
+fetch-plugin.ts
+
+```ts
+import * as esbuild from "esbuild-wasm";
+import axios from "axios";
+import localForage from "localforage";
+
+const fileCache = localForage.createInstance({
+  name: "filecache",
+});
+
+export const fetchPlugin = (inputCode: string) => {
+  return {
+    name: "fetch-plugin ",
+    setup(build: esbuild.PluginBuild) {
+      build.onLoad({ filter: /.*/ }, async (args: any) => {
+        //
+      });
+    },
+  };
+};
+```
+
+index.tsx
+
+```ts
+const result = await ref.current.build({
+  plugins: [unpkgPathPlugin(), fetchPlugin(input)],
+});
+```
+
+## Loading CSS Files
+
+```ts
+import "bulma/css/bulma.css";
+```
+
+현재 esbuild 의 번들링은 jsx 기준으로 작성된다.
+css 파일의 경우 번들링 과정에서 에러가 발생한다. (undefined @, ".")
+
+## Configuring the Correct Loader
+
+esbuild.github.io
+css
+
+- loader: 'css'
+- 자바스크립트와 CSS를 분리해서 번들링을 해야한다.
+
+경로에 .css가 포함된 경우 css로 로드하고, 그 외에는 jsx로 로드한다.
+
+fetch-plugin.ts
+
+```ts
+const loader = args.path.match(/.css$/) ? "css" : "jsx";
+const result: esbuild.OnLoadResult = {
+  loader: loader,
+};
+```
+
+## Small Shortcoming with ESBuild
+
+CSS 파일은 index.js에 inject 될 수 없다.
+
+CSS 가져와서 자바스크립트로 감싼 다음, 다른 JS 파일과 번들링 한다.
+
+## Tricking ESBuild's CSS Handling
+
+fetch-plugin.ts
+
+```ts
+const fileType = args.path.match(/.css$/) ? "css" : "jsx";
+const contents =
+  fileType === "css"
+    ? `
+    const style = document.createElement('style');
+    style.innerText = 'body{background-color: "red" }';
+    documnet.head.appendChild(style);
+  `
+    : data;
+
+const result: esbuild.OnLoadResult = {
+  loader: "jsx",
+  contents: contents,
+  resolveDir: new URL("./", request.responseURL).pathname,
+};
+```
+
+한계: esBuild 가 제공하는 최신 문법을 사용할 수 없다.
+
+## Escaping CSS Snippets
+
+CSS 코드가 안전하게 실행 될 수 있도록, ", ', 줄바꿈을 이스케이핑 해준다.
+
+fetch-plugin.ts
+
+```ts
+const escaped = data
+  .replace(/\n/g, "")
+  .replace(/"/g, '\\"')
+  .replace(/'/g, "\\'");
+
+const fileType = args.path.match(/.css$/) ? "css" : "jsx";
+const contents =
+  fileType === "css"
+    ? `
+  const style = document.createElement('style');
+  style.innerText = '${escaped}';
+  document.head.appendChild(style);
+`
+    : data;
+```
+
+## Seperate Load Filters
+
+모듈을 3가지 타입으로 나누어 다른 객체를 리턴한다.
+
+1. `index.js`: 패키지의 메인 파일
+2. `.css`: 스타일시트
+3. `.js`: 나머지 자바스크립트
+
+fetch-plugin.ts
+
+```ts
+export const fetchPlugin = (inputCode: string) => {
+  return {
+    name: "fetch-plugin ",
+    setup(build: esbuild.PluginBuild) {
+      build.onLoad({ filter: /(^index\.js$)/ }, () => {..})
+      build.onLoad({ filter: /.css$/ }, async (args: any) => {...})
+      build.onLoad({ filter: /.*/ }, async (args: any) => {...})
+    }
+
+```
+
+## Extracting Common Cashing Logic
+
+onLoad 메서드의 리턴 값이 없는 경우, 다음 미들웨어(onLoad) 실행한다.
+
+```ts
+build.onLoad({ filter: /(^index\.js$)/ }, () => {..})
+build.onLoad({ filter: /.*/ }, async (args: any) => {
+  const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path);
+  if (cachedResult) {
+    return cachedResult;
+  }
+});
+build.onLoad({ filter: /.css$/ }, async (args: any) => {...})
+build.onLoad({ filter: /.*/ }, async (args: any) => {...})
+```
+
+## A Better Way of Loading WASM
+
+public 파일에 web assembly 코드를 보관하는 대신, unpkg에 호스팅된 코드를 사용할 수 있다.
+
+```ts
+const wasmURL = "https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm";
+const startService = async () => {
+  ref.current = await esbuild.startService({
+    worker: true,
+    wasmURL: wasmURL,
+  });
+};
+```
