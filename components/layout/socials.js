@@ -29,6 +29,19 @@ export const SocialGroup = ({ iconsize = 16, vertical = false }) => (
         height={iconsize}
       />
     </a>
+    <a
+      href="/assets/jongsun_park_resume.pdf"
+      target="_blank"
+      rel="noopener noreferer"
+      download
+    >
+      <Image
+        src="/svg/download.svg"
+        alt="download resume"
+        width={iconsize}
+        height={iconsize}
+      />
+    </a>
   </Container>
 );
 

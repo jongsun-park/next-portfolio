@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+// @import "./mobile.scss";
 
 :root {
   --font-primary: "Open Sans", sans-serif;
@@ -9,6 +10,11 @@
   --color-primary-light: #f0970b;
   --color-primary: #ea6c2e;
   --color-primary-dark: #923e22;
+  --bp-xxl: 1400px;
+  --bp-xl: 1200px;
+  --bp-lg: 992px;
+  --bp-md: 768px;
+  --bp-sm: 576px;
 }
 
 html,

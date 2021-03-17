@@ -5,7 +5,7 @@ import { Button } from "../../styles/button";
 import styled from "styled-components";
 import Date from "../../components/date";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Pagination = ({ lastIndex, pageIndex, setPageIndex }) => {
@@ -30,7 +30,9 @@ export default function Posts({ postsData }) {
   const numPerPage = 5;
   const [pageIndex, setPageIndex] = useState(1);
   const lastIndex = Math.ceil(postsData.length / numPerPage);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pageIndex]);
   return (
     <Layout>
       <PostContainer>
@@ -94,6 +96,14 @@ const PostContainer = styled(Container)`
     }
     button:hover {
       border-color: var(--color-mint);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .post-container {
+      .post-title {
+        font-size: 1.6rem;
+      }
     }
   }
 `;

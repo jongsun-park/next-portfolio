@@ -65,4 +65,23 @@ const IntroContainer = styled(Container)`
     width: 50%;
     z-index: -1;
   }
+  @media (max-width: 576px) {
+    // background: yellow;
+    margin-top: 0;
+    .intro-hello {
+      font-size: 2.4rem;
+    }
+    p {
+      max-width: 90%;
+      margin: 0.5rem 0 1rem;
+    }
+    .intro-image {
+      position: relative;
+      min-height: 80vw;
+      right: 0;
+      width: 100%;
+      max-width: 60%;
+      margin: auto;
+    }
+  }
 `;

@@ -27,7 +27,7 @@ export default function Project({ projectData }) {
           <motion.div layoutId={`${id}_image`} className="project-image">
             <Image
               src={`https:${thumbnail.fields.file.url}`}
-              width="auto"
+              width="500"
               height="500"
             />
           </motion.div>
@@ -45,10 +45,11 @@ const ProjectContainer = styled(PageContainer)`
   .project-image {
     display: grid;
     margin-top: 2rem;
-    padding: 1rem;
     background: var(--color-light);
+
     img {
       object-fit: contain;
+      transform: scale(0.9);
     }
   }
 `;

@@ -70,6 +70,9 @@ export const ProjectContainer = styled(Container)`
     > div {
       flex: 1;
     }
+    .project-content {
+      margin-bottom: 1rem;
+    }
     .project-title {
       font-size: 2rem;
       margin-bottom: 0.5rem;
@@ -89,6 +92,19 @@ export const ProjectContainer = styled(Container)`
     .project-image img {
       object-fit: contain;
       object-position: left;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .project-container {
+      flex-direction: column;
+      .project-image {
+        min-height: 80vw;
+        padding: 1rem;
+      }
+      .project-title {
+        font-size: 1.6rem;
+      }
     }
   }
 `;

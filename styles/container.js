@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.section`
   max-width: 1200px;
   padding: 30px;
-  margin: 2rem auto;
+  margin: 0rem auto;
   .section-tag {
     color: var(--color-mint);
     font-weight: bold;
@@ -16,6 +16,16 @@ export const Container = styled.section`
   }
   .page-title {
     font-size: 3rem;
+  }
+  @media (max-width: 576px) {
+    margin: 0 auto;
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .page-title {
+      font-size: 2rem;
+    }
   }
 `;
 
@@ -35,8 +45,10 @@ export const PageContainer = styled(Container)`
     h2 {
       margin: 1rem 0 0.5rem;
     }
-    ul {
+    ul,
+    ol {
       margin-bottom: 1rem;
+      padding-left: 1rem;
     }
 
     p code,

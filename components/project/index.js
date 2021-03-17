@@ -22,8 +22,8 @@ export const Project = ({ allProjectData }) => {
               <motion.div className="image-container" layoutId={`${id}_image`}>
                 <Image
                   src={`https:${thumbnail.fields.file.url}`}
-                  width="700"
-                  height="700"
+                  width="500"
+                  height="500"
                 />
               </motion.div>
               <div className="text-container">
@@ -53,16 +53,29 @@ const ProjectContainer = styled(Container)`
   .image-text,
   .text-image {
     display: flex;
+    justify-content: space-around;
     margin: 2rem 0 3rem;
     .image-container,
     .text-container {
       flex: 1;
+      padding: 1rem 2rem;
+    }
+    .image-container {
+      display: grid;
+      img {
+        max-height: 300px;
+        object-fit: cover;
+      }
     }
   }
 
   .text-image {
     .text-container {
       order: -1;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
   }
 
@@ -77,50 +90,38 @@ const ProjectContainer = styled(Container)`
     margin: 0;
     font-size: 2rem;
     font-family: var(--font-secondary);
-    max-width: 15ch;
   }
   .project__descrpition {
   }
-`;
 
-// export const Project = ({ allProjectData }) => {
-//   const { loading, error, data } = useSelector((state) => state.contentful);
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     fetchContentful(dispatch);
-//   }, []);
-//   return (
-//     <Container className="projects">
-//       <p className="section-tag">LASTEST WORK</p>
-//       <h2 className="section-title">My Projects</h2>
-//       <div>
-//         <ul>
-//           {loading ? (
-//             <p>loading...</p>
-//           ) : (
-//             data.map((p, index) => (
-//               <div
-//                 key={p.fields.title}
-//                 className={`${index % 2 === 0 ? "image-text" : "text-image"}`}
-//               >
-//                 <Image
-//                   width="300"
-//                   height="300"
-//                   src={`https:${p.fields.thumbnail.fields.file.url}`}
-//                 />
-//                 <div>
-//                   <p>{index + 1}</p>
-//                   <h3>{p.fields.title}</h3>
-//                   <p>{p.fields.description}</p>
-//                   {p.fields.body && (
-//                     <Link href={`/projects/${p.sys.id}`}>DETAIL</Link>
-//                   )}
-//                 </div>
-//               </div>
-//             ))
-//           )}
-//         </ul>
-//       </div>
-//     </Container>
-//   );
-// };
+  @media (max-width: 576px) {
+    // background: yellow;
+    .image-text,
+    .text-image {
+      max-width: 100%;
+      flex-direction: column;
+      .text-container {
+        max-width: 100%;
+        order: -1;
+        margin-bottom: 2rem;
+        text-align: left;
+        align-items: flex-start;
+        padding: 0;
+
+        .project__title {
+          font-size: 1.4rem;
+          max-width: 90%;
+          padding-left: 0;
+        }
+        .project__index {
+          font-size: 3rem;
+          margin-bottom: 10px;
+        }
+      }
+      .image-container {
+        max-width: 100%;
+        padding: 0;
+      }
+    }
+  }
+`;

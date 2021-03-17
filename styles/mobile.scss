@@ -1,0 +1,31 @@
+$bp-xxl: 1400px;
+$bp-xl: 1200px;
+$bp-lg: 992px;
+$bp-md: 768px;
+$bp-sm: 576px;
+
+@media (max-width: $bp-xxl) {
+  html {
+    background: red;
+  }
+}
+@media (max-width: $bp-xl) {
+  html {
+    background: blue;
+  }
+}
+@media (max-width: $bp-lg) {
+  html {
+    background: green;
+  }
+}
+@media (max-width: $bp-md) {
+  html {
+    background: yellowgreen;
+  }
+}
+@media (max-width: $bp-sm) {
+  html {
+    background: yellow;
+  }
+}
