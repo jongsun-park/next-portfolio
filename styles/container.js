@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
+  width: 100%;
   max-width: 1200px;
   padding: 30px;
   margin: 0rem auto;
-  overflow-x: hidden;
   .section-tag {
     color: var(--color-mint);
     font-weight: bold;

@@ -76,6 +76,7 @@ export const Blog = ({ allPostsData }) => {
 };
 
 const BlogContainer = styled(Container)`
+  overflow-x: hidden;
   .section-info-container {
     margin-bottom: 1rem;
     .section-title {
