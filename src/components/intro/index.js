@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-import { content } from "../../content";
-import { LineButton } from "../../styles/button";
-import { Container } from "../../styles/container";
+import { content } from "src/content";
+import { LineButton } from "src/styles/button";
+import { Container } from "src/styles/container";
 const { title, jobDescription, description } = content;
 
 const Icon = ({ stroke = "#000" }) => (

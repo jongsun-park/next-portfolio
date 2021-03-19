@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import { SocialGroup } from "./socials";
+import { content } from "src/content";
 
 export const Footer = () => (
   <Container id="contact-me">
     <h3 className="footer-heading">
-      Do you have a project?
-      <br />
-      Let's work together!
+      <a href={`mailto:${content.email}`}>
+        Do you have a project?
+        <br />
+        Let's work together!
+      </a>
     </h3>
+
     <div className="row">
       <div className="col">
         <SocialGroup vertical={false} />
@@ -23,7 +27,7 @@ export const Footer = () => (
 
 const Container = styled.footer`
   background: var(--color-light);
-  padding: 3rem 1rem 1rem;
+  padding: 1rem;
   .row {
     display: flex;
     align-items: flex-start;
@@ -34,8 +38,15 @@ const Container = styled.footer`
 
   .footer-heading {
     font-size: 2rem;
-    margin: 10px 0 2rem 10px;
+    margin: 1rem 10px 2rem;
     line-height: 1.2;
+    text-decoration: underline;
+    a {
+      color: var(--color-default);
+    }
+    &:hover a {
+      color: var(--color-mint);
+    }
   }
   .footer-copyright {
     text-align: right;

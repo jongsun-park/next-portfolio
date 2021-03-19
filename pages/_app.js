@@ -1,6 +1,6 @@
 // import { Provider } from "react-redux";
 // import { useStore } from "../store";
-import "../styles/globals.scss";
+import "src/styles/globals.scss";
 import { AnimateSharedLayout } from "framer-motion";
 
 export default function App({ Component, pageProps }) {

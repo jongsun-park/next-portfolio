@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": ["src", "pages/projects/[id].js"],
+  "exclude": ["node_modules", "build"]
+}

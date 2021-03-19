@@ -1,9 +1,9 @@
-import Layout from "../../components/layout";
-import { getSortedPostsData } from "../../lib/posts";
-import { Container } from "../../styles/container";
-import { Button } from "../../styles/button";
+import Layout from "src/components/layout";
+import { getSortedPostsData } from "src/lib/posts";
+import { Container } from "src/styles/container";
+import { Button } from "src/styles/button";
 import styled from "styled-components";
-import Date from "../../components/date";
+import Date from "src/components/date";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";

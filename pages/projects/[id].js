@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Layout from "../../components/layout";
-import { getAllProjectIds, getProjectData } from "../../lib/projects";
-import MarkdownContent from "../../lib/md2html";
-import { PageContainer } from "../../styles/container";
-import Date from "../../components/date";
+import Layout from "src/components/layout";
+import { getAllProjectIds, getProjectData } from "src/lib/projects";
+import MarkdownContent from "src/lib/md2html";
+import { PageContainer } from "src/styles/container";
+import Date from "src/components/date";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import styled from "styled-components";
@@ -46,7 +46,6 @@ const ProjectContainer = styled(PageContainer)`
     display: grid;
     margin-top: 2rem;
     background: var(--color-light);
-
     img {
       object-fit: contain;
       transform: scale(0.9);

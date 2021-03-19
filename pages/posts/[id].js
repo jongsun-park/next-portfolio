@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Layout from "../../components/layout";
-import { getAllPostIds, getPostData } from "../../lib/posts";
-import Date from "../../components/date";
-import { PageContainer } from "../../styles/container";
+import Layout from "src/components/layout";
+import { getAllPostIds, getPostData } from "src/lib/posts";
+import Date from "src/components/date";
+import { PageContainer } from "src/styles/container";
 import { motion } from "framer-motion";
 
 export default function Post({ postData }) {

@@ -1,14 +1,14 @@
 import Head from "next/head";
 
-import Layout from "../components/layout";
-import { getSortedPostsData } from "../lib/posts";
-import { getAllProject } from "../lib/projects";
+import Layout from "src/components/layout";
+import { getSortedPostsData } from "src/lib/posts";
+import { getAllProject } from "src/lib/projects";
 
-import { Intro } from "../components/intro";
-import { Project } from "../components/project";
-import { content } from "../content";
+import { Intro } from "src/components/intro";
+import { Project } from "src/components/project";
+import { content } from "src/content";
 
-import { Blog } from "../components/blog";
+import { Blog } from "src/components/blog";
 const { title } = content;
 
 export default function Home({ allPostsData, allProjectData }) {

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { content } from "src/content";
 
 const routes = [
   {
@@ -18,7 +19,7 @@ const routes = [
   },
   {
     name: "Contact Me",
-    path: "#contact-me",
+    path: `mailto:${content.email}`,
   },
 ];
 

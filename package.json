@@ -9,7 +9,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
     "contentful": "^8.2.0",
     "date-fns": "^2.19.0",
     "framer-motion": "^3.10.5",

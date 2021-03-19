@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Container } from "../../styles/container";
-import { Button } from "../../styles/button";
+import { Container } from "src/styles/container";
+import { Button } from "src/styles/button";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 

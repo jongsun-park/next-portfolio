@@ -1,8 +1,8 @@
-import Layout from "../../components/layout";
+import Layout from "src/components/layout";
 import Link from "next/link";
-import { getAllProject } from "../../lib/projects";
-import { Container } from "../../styles/container";
-import { Button } from "../../styles/button";
+import { getAllProject } from "src/lib/projects";
+import { Container } from "src/styles/container";
+import { Button } from "src/styles/button";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -66,7 +66,6 @@ export const ProjectContainer = styled(Container)`
     margin: 2rem 0;
     display: flex;
     min-height: 40vw;
-
     > div {
       flex: 1;
     }
@@ -94,7 +93,6 @@ export const ProjectContainer = styled(Container)`
       object-position: left;
     }
   }
-
   @media (max-width: 576px) {
     .project-container {
       flex-direction: column;

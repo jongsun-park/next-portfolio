@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import Date from "../../components/date";
-import { Container } from "../../styles/container";
+import Date from "src/components/date";
+import { Container } from "src/styles/container";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
