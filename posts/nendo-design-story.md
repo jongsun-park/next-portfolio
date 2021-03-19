@@ -1,7 +1,6 @@
 ---
 title: "Nendo 디자인 이야기"
-date: "0000-00-00"
-category: "Design / Book Notes"
+date: "2021-03-19"
 ---
 
 # 넨도 디자인 이야기 - 사토 오오키

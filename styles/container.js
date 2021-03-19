@@ -4,6 +4,7 @@ export const Container = styled.section`
   max-width: 1200px;
   padding: 30px;
   margin: 0rem auto;
+  overflow-x: hidden;
   .section-tag {
     color: var(--color-mint);
     font-weight: bold;
