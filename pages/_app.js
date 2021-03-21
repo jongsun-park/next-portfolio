@@ -1,15 +1,14 @@
-// import { Provider } from "react-redux";
-// import { useStore } from "../store";
 import "src/styles/globals.scss";
-import { AnimateSharedLayout } from "framer-motion";
+import "swiper/swiper-bundle.min.css";
 
-export default function App({ Component, pageProps }) {
-  // const store = useStore(pageProps.initialReduxState);
+import { motion, AnimatePresence } from "framer-motion";
+
+export default function App({ Component, pageProps, router }) {
   return (
-    // <Provider store={store}>
-    <AnimateSharedLayout>
-      <Component {...pageProps} />
-    </AnimateSharedLayout>
-    // </Provider>
+    <AnimatePresence exitBeforeEnter>
+      <motion.div key={router.route}>
+        <Component {...pageProps} />
+      </motion.div>
+    </AnimatePresence>
   );
 }

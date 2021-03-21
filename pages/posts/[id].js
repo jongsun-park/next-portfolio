@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Layout from "src/components/layout";
 import { getAllPostIds, getPostData } from "src/lib/posts";
 import Date from "src/components/date";
@@ -7,10 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Post({ postData }) {
   return (
-    <Layout>
-      <Head>
-        <title>{postData.title}</title>
-      </Head>
+    <Layout title={postData.title}>
       <PageContainer>
         <article>
           <motion.h1 className="page-title" layoutId={`${postData.id}_title`}>

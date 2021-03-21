@@ -2,11 +2,11 @@ import Head from "next/head";
 import { Header, SideBar } from "./header";
 import { Footer } from "./footer";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { Page } from "src/components/motion/page";
 
 export const siteTitle = "Jongsun Park | Portfolio";
 
-const Layout = ({ children }) => {
+const Layout = ({ title, children }) => {
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, 0);
@@ -16,20 +16,15 @@ const Layout = ({ children }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <motion.div
-      className="layout"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2 }}
-    >
+    <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{title || siteTitle}</title>
       </Head>
       {open && <SideBar open={open} setOpen={setOpen} />}
       <Header open={open} setOpen={setOpen} />
-      <main>{children}</main>
+      <Page>{children}</Page>
       <Footer />
-    </motion.div>
+    </>
   );
 };
 

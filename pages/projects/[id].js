@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Layout from "src/components/layout";
 import { getAllProjectIds, getProjectData } from "src/lib/projects";
 import MarkdownContent from "src/lib/md2html";
@@ -12,10 +11,7 @@ export default function Project({ projectData }) {
   const { title, description, body, thumbnail } = projectData.fields;
   const { id, createdAt } = projectData.sys;
   return (
-    <Layout>
-      <Head>
-        <title>{title}</title>
-      </Head>
+    <Layout title={title}>
       <ProjectContainer>
         <article>
           <motion.h1 className="page-title" layoutId={`${id}_title`}>
