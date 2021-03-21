@@ -14,6 +14,15 @@ const buttonCss = css`
   cursor: pointer;
 `;
 
+const boldBtn = css`
+  margin-right: 4px;
+  background: var(--color-mint);
+  color: var(--color-light);
+  &:hover {
+    background: var(--color-primary);
+  }
+`;
+
 export const Button = styled.button`
   ${buttonCss}
   border: 1px solid var(--color-mint);
@@ -25,6 +34,8 @@ export const Button = styled.button`
     background: var(--color-mint);
     color: var(--color-light);
   }
+
+  ${(props) => props.boldBtn && boldBtn}
 `;
 
 export const LineButton = styled.button`

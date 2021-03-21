@@ -14,7 +14,7 @@ export default function Projects({ total, projects }) {
         <h2 className="page-title">My Projects</h2>
         <small className="projects-total">Total: {total}</small>
         {projects.map((post, index) => {
-          const { title, description, thumbnail } = post.fields;
+          const { title, description, thumbnail, url } = post.fields;
           const { id } = post.sys;
           const index2digit = index + 1 < 10 ? "0" + (index + 1) : index;
           return (
@@ -24,11 +24,23 @@ export default function Projects({ total, projects }) {
                   <span className="project-index">{index2digit}</span> {title}
                 </motion.h3>
                 <p className="project-description">{description}</p>
-                <Link href={`/projects/${id}`}>
-                  <a>
-                    <Button>Details</Button>
-                  </a>
-                </Link>
+                <div className="project-links">
+                  {url && (
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferer"
+                      className="project-live"
+                    >
+                      <Button boldBtn>Details</Button>
+                    </a>
+                  )}
+                  <Link href={`/projects/${id}`}>
+                    <a>
+                      <Button>Details</Button>
+                    </a>
+                  </Link>
+                </div>
               </div>
               <motion.div layoutId={`${id}_image`} className="project-image">
                 <Image

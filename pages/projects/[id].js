@@ -8,7 +8,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export default function Project({ projectData }) {
-  const { title, description, body, thumbnail } = projectData.fields;
+  const { title, description, body, thumbnail, fullpage } = projectData.fields;
   const { id, createdAt } = projectData.sys;
   return (
     <Layout title={title}>
@@ -20,6 +20,11 @@ export default function Project({ projectData }) {
           <div className="page-date">
             <Date dateString={createdAt} />
           </div>
+
+          <div className="page-content">
+            <p>{description}</p>
+            <MarkdownContent>{body}</MarkdownContent>
+          </div>
           <motion.div layoutId={`${id}_image`} className="project-image">
             <Image
               src={`https:${thumbnail.fields.file.url}`}
@@ -27,10 +32,11 @@ export default function Project({ projectData }) {
               height="500"
             />
           </motion.div>
-          <div className="page-content">
-            <p>{description}</p>
-            <MarkdownContent>{body}</MarkdownContent>
-          </div>
+          {fullpage && (
+            <div className="page-fullpage">
+              <img src={`https:${fullpage.fields.file.url}`} />
+            </div>
+          )}
         </article>
       </ProjectContainer>
     </Layout>
@@ -45,6 +51,12 @@ const ProjectContainer = styled(PageContainer)`
     img {
       object-fit: contain;
       transform: scale(0.9);
+    }
+  }
+  @media (min-width: 576px) {
+    .page-content {
+      column-count: 2;
+      column-gap: 30px;
     }
   }
 `;

@@ -12,7 +12,7 @@ export const Project = ({ allProjectData }) => {
       <h2 className="section-title">My Projects</h2>
       <div className="projects">
         {allProjectData.map((p, index) => {
-          const { title, description, thumbnail } = p.fields;
+          const { title, description, thumbnail, url } = p.fields;
           const { id } = p.sys;
           return (
             <div
@@ -35,11 +35,24 @@ export const Project = ({ allProjectData }) => {
                   {title}
                 </motion.h3>
                 <p className="project__description">{description}</p>
-                <Link href={`/projects/${id}`}>
-                  <a>
-                    <Button>Details</Button>
-                  </a>
-                </Link>
+                <div className="product__links">
+                  {url && (
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferer"
+                      className="product__link-live"
+                    >
+                      <Button boldBtn>Live</Button>
+                    </a>
+                  )}
+
+                  <Link href={`/projects/${id}`}>
+                    <a>
+                      <Button>Details</Button>
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
           );
