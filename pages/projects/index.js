@@ -32,7 +32,7 @@ export default function Projects({ total, projects }) {
                       rel="noopener noreferer"
                       className="project-live"
                     >
-                      <Button boldBtn>Details</Button>
+                      <Button boldBtn>LIVE</Button>
                     </a>
                   )}
                   <Link href={`/projects/${id}`}>
