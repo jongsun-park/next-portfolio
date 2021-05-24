@@ -1,80 +1,11 @@
 ---
-title: "WordPress Developer - Plugins & Theme"
-date: "2021-04-01"
+title: "WP Theme - 02 Theme Foundation"
+date: "2021-05-24"
 ---
 
-## 01 Getting Started
+# 02 Theme Development Foundation
 
-### Getting to know WordPress
-
-[wordpress.com](https://wordpress.com/)
-
-- hosting platform for wordpress
-- user friendly, but not developer friendly
-
-[wordpress.org](https://wordpress.org/)
-
-- official wordpress site
-- 튜토리얼: v 5.0 / 최신: v 5.7
-- support / documentation / Codex
-- [codex.wordpress.org](https://codex.wordpress.org/)
-- -> [developer.wordpress.org](https://developer.wordpress.org/)
-
-ex. Code Refference: `the_content`
-
-- original source code: 코어 워드프레스
-- changelog: 해당 함수가 어떻게 바뀌었는지 기록
-- related: 코어 워드프레스에서 어디에서 사용 되었는지
-- user contributes:
-
-automattic.com
-
-- Jetpack / WooCommerce
-- own 'wordpress.com'
-
-### PHP Refesher & WordPress Coding Standards
-
-PHP online editor: [writephponline](https://www.writephponline.com/)
-
-```php
-<?php
-// 현재 파일의 결재 함수
-echo __FILE__;
-
-// array
-$arr = [1, 2, 3, 4, 5];
-
-// 함수
-// Example 1
-$arr_double = array_map(function($val){
-  return $val * 2;
-}, $arr);
-
-print_r( $arr_double );
-
-// Example 2
-function not_an_anonymous_function($val){
-   return $val * 2;
-}
-
-$arr_double_v2 = array_map('not_an_anonymous_function', $arr);
-print_r($arr_double_v2);
-
-```
-
-배열의 map 메서드
-
-- `array_map(익명함수, 배열)`
-- `array_map(함수이름, 배열)`
-
-Resources
-
-- [OOP / Object-Oriented PHP for Beginner](https://code.tutsplus.com/tutorials/object-oriented-php-for-beginners--net-12762)
-- [WordPress Best Practices](https://make.wordpress.org/core/handbook/best-practices/)
-
-## 02 Theme Development Foundation
-
-### Exploring Wordpress & Configuring the wp-config.php file
+## Exploring Wordpress & Configuring the wp-config.php file
 
 root/wp-config.php
 
@@ -99,7 +30,7 @@ Aphache config (php.ini)
 - post_max_size=50M // 기본값: 40M
 - upload_max_filesize=50M // 기본값: 40M
 
-### File Headers
+## File Headers
 
 Theme에 반드시 `index.php`, `style.css`이 포함되어야 한다.
 
@@ -113,9 +44,9 @@ wp-content/themes/udemy
 
 - style.css (File Headers)
 - index.php
-- Screenshot.png (theme screentshop: 880x660)
+- screenshot.png (theme screentshop: 880x660)
 
-styles.css
+### styles.css
 
 ```css
 /*
@@ -131,13 +62,13 @@ Text Domain: udemy
 */
 ```
 
-index.php
+### index.php
 
 ```php
 Hello World!
 ```
 
-### Functions & Action Hooks
+## Functions & Action Hooks
 
 1. 강의에서 제공된 theme 파일 안의 assets 폴더를 로컬 wp 폴더에 복사한다.
 2. index.html (정적 페이지)를 index.php (동적 페이지)에 복사한다.
@@ -188,7 +119,7 @@ function ju_enqueue(){}
 
 ```
 
-### Loading styles and scripts with enqueues
+## Loading styles and scripts with enqueues
 
 - 외부 스크립트/스타일시트는 등록을 먼저 한 후 가져온다.
 - prefix를 사용하여, handle이 중복되는 것을 방지 한다. (ex. ju_bootstrap, ju_plugin).
@@ -262,7 +193,7 @@ function ju_enqueue(){
 }
 ```
 
-### Cache Issues
+## Cache Issues
 
 - 효율적으로 페이지를 로드하기 위해 기존의 코드(CSS, JS, image)를 브라우저 캐쉬에 저장한다.
 - 개발 중에서는 교체된 코드를 반영하기 위해 캐시를 지워워야 한다.
@@ -272,7 +203,7 @@ function ju_enqueue(){
 functions.php
 
 ```php
-define(JU_DEVELOPMENT_MODE, true);
+define('JU_DEVELOPMENT_MODE', true);
 ```
 
 enqueue.php
@@ -302,11 +233,11 @@ function enqueue(){
 
 ```
 
-### Adding Dummy Content
+## Adding Dummy Content
 
 FakerPress: create faker users / terms and posts
 
-### Menu Support
+## Menu Support
 
 1. 메뉴가 활성화 되면, `register_nav_menu()` 를 사용해서 메뉴를 등록할 수 있다.
 2. menu를 등록하면, `wp_nav_menu()`를 통해 페이지에 출력할 수 있다. (CSS 클래스를 설정하기 위해서는 `custom walker`가 필요하다.)
@@ -386,9 +317,9 @@ wp_nav_menu( array $args = array(
 
 [WP Bootstrap Navwalker](https://github.com/wp-bootstrap/wp-bootstrap-navwalker)
 
-### Aside: Menu Walker
+## Aside: Menu Walker
 
-### Create Header & Footer Areas
+## Create Header & Footer Areas
 
 1. `get_header()`, `get_footer()`을 사용해서 header.php, footer.php를 index.php 안으로 가져올 수 있다.
 2. header.php / footer.php: 파일명은 반드시 동일 형식 이여야 한다.
@@ -413,7 +344,7 @@ root/footer.php
 </html>
 ```
 
-root.index.php
+index.php
 
 ```php
 <?php get_header(); ?>
@@ -425,7 +356,7 @@ root.index.php
 
 - $class: 클래스1 클래스2 클래스2
 
-### Creating Sidebar and Widget Areas
+## Creating Sidebar and Widget Areas
 
 1. sidebars 코드는 sidebar.php 파일 안에 작성하고, index.php 에서 `get_sidebar()`를 사용해서 가져온다.
 2. sidebars 또한 header / footer 와 동일한 방식으로 명명된다.
@@ -444,7 +375,7 @@ root/includes/widgets.php
 ```php
 <?php
 
-function ju_widjets()
+function ju_widgets()
 {
   register_sidebar([
     'name'          => __('My Frist Theme Sidebar', 'udemy'),
@@ -483,7 +414,7 @@ sidebar.php
 
 - before_widget: 위젯의 아이디의 값을 `%1$s`, 클래스의 이름을 `%2$s`로 가져와서 렌더링 한다.
 
-### Formatting the search form
+## Formatting the search form
 
 - 워드프레스는 searchform.php 파일을 검색하고, 해당 코드를 검색 파일로 사용한다.
 - 해당 템플릿을 발견하지 못한 경우, WP는 자동으로 `get_search_form()` 을 실행하여 검색 위젯을 출력한다.
@@ -526,7 +457,7 @@ echo $url;
 
 [get_search_form($args)](https://developer.wordpress.org/reference/functions/get_search_form/)
 
-### The Loop
+## The Loop
 
 1. The loop를 사용해서 posts 배열을 순회 할 수 있다.
 2. `add_theme_support ('post-thumbnails');`를 사용해서 featured-image를 사용할 수 있다.)
@@ -582,7 +513,7 @@ if ( have_posts() ) {
 }
 ```
 
-### Template Parts
+## Template Parts
 
 1. Template parts는 템플렛을 재사용가능한 코드 블록으로 나누어 사용할 수 있다.
 2. `get_template_part( $slug, $name )`:
@@ -606,7 +537,7 @@ get_template_part('content-foo'); when you don't need backup template
 
 [get_template_part( $slug, $name, $args )](https://developer.wordpress.org/reference/functions/get_template_part/): Loads a template part into a template.
 
-### Template Tags
+## Template Tags
 
 1. Template Tags: 데이터를 가공하거나, 출력하는 함수.
 2. 대부분의 템플릿 태그는 루프 안의 post를 감지해서 해당 post의 데이터를 가져올 수 있다.
@@ -708,7 +639,7 @@ the_post_thumbnail('post-thumbnail', ['class' => 'img-responsive responsive--ful
 
 - Outputs the field from the user’s DB object. Defaults to current post’s author.
 
-### Pagination
+## Pagination
 
 [Pagination](https://developer.wordpress.org/themes/functionality/pagination/)
 
@@ -721,549 +652,17 @@ the_post_thumbnail('post-thumbnail', ['class' => 'img-responsive responsive--ful
 </div>
 ```
 
-#### Styles & Scripts
+# Styles & Scripts
 
 - Be sure to register and enqueue your scripts/styles.
 - Registering allows for plugins and Wordpress to manipulate your files for whatever reason.
 - Easier to manage and control
 
-#### Menus
+# Menus
 
 - Wordpress provides in-build features that you can enable/disable.
 - Menus can be enabled by calling the `register_nav_menu()` function
 
-#### Template Parts
+# Template Parts
 
 - It's good practice to split resuable pieces of code into seperate files so you can include theme later.
-
-## 03 Templates & The Customizer
-
-### Theme Hierachy & Single Post Template
-
-Posts
-
-- single-{post-type}-{slug}.php (single-post-hello.php)
-- single-{post-type}.php (single-post.php)
-- single.php: single.php(post template) / page.php(page template)
-- singular.php: an extra fallback for all post types, regardless if built-in or custom
-- index.php
-
-Navigation
-
-- `previous_posts_link()`, `next_posts_link()`: paginating pages with multiple posts
-- `previous_post_link()`, `next_post_link()`: providing links to the next and previous post for a single post
-
-single.php
-
-```php
-<?php
-if (have_posts()){
-  while(have_posts()){
-    the_post();
-    global $post;
-    $author_ID    = $post->post_author;
-    $author_URL   = get_author_posts_url($author_ID);
-?>
-
-  <?php the_title(); ?>
-  <?php echo get_the_date(); ?>
-  <?php the_author(); ?>
-  <?php the_category(); ?>
-  <?php comments_number(); ?>
-  <?php
-    if (has_post_thumbnail()){
-      <?php the_permalink(); ?>
-      <?php the_post_thumbnail('full'); ?>
-    }
-  ?>
-  <?php
-    the_content();
-    $default = array(
-      'before'    => '<p class="text-center">' . __('Page: ', 'udemy'),
-      'after'     => '</p>'
-    );
-  ?>
-  <?php the_tags('', ' '); ?>
-  <?php previous_post_link(); ?>
-  <?php next_post_link(); ?>
-
-<?php
-  }
-}
-?>
-```
-
-[Theme Development](https://codex.wordpress.org/Theme_Development)
-
-[VISUALIZE THE WORDPRESS TEMPLATE HIERARCHY](https://wphierarchy.com/)
-
-[Template Hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/)
-
-### Comments Template
-
-- pluggable: the code can be extended by 3rd party plugins or WordPress itself.
-- comments.php: a template for comments
-- `post_password_required()`: check if the current post is password protected
-- `comment_form()`
-  - display form
-  - perform additional checks before displaying the form
-- `comments`:
-  - global varialble
-  - available for access inside a loop
-
-single.php
-
-```php
-<?php if (comments_open() || get_comments_number()) {
-  comments_template();
-}
-?>
-```
-
-comments.php
-
-```php
-<?php
-if (post_password_required()) {
-  return;
-  // function 으로 해당 템플릿을 불러오기 때문에 이후 코드는 실행 되지 않는다.
-};
-?>
-
-// 만약 comment가 있다면
-<?php if (have_comments()) { ?>
-  // total count
-  <?php comments_number(); ?>
-    // comments iteration
-    <?php foreach ($comments as $comment) { ?>
-        // avater: binding, size, , , attrs
-        <?php echo get_avatar($comment, 60, '', '', ['class', 'avatar-60 photo avatar-default']); ?>
-        // 작성자
-        <?php comment_author(); ?>
-        // 작성 날짜
-        <?php comment_date(); ?>
-        // 작성 내용
-        <?php comment_text() ?>
-      <?php } ?>
-    <?php } ?>
-    // pagination
-    the_comments_pagination();
-<?php } ?>
-
-<?php
-  comment_form([
-    'comment_filed' => '',
-    'fields'        => [
-      'author'      => '<div><label>' . __('Name', 'udemy').'<label><input type="text" name="author" class=""/></div>',
-      'email'       => '<div><label>' . __('Email', 'udemy').'<label><input type="text" name="email" class=""/></div>',
-      'url'         => '<div><label>' . __('Website', 'udemy').'<label><input type="text" name="url" class=""/></div>',
-    ],
-    'class_submit'  => '',
-    'label_submit'  => __('Submit Comment', 'udemy'),
-    'title_reply'   => __('Leave a Comment', 'udemy')
-  ])
-?>
-```
-
-### Author Template Tags
-
-- `nl2br()`: format text / long user bio's readable
-- `get avartar()`: accepts a user ID, email or comment object
-
-(`get_avatar( mixed $id_or_email, int $size = 96, string $default = '', string $alt = '', array $args = null )`)[https://developer.wordpress.org/reference/functions/get_avatar/]
-
-(`the_author_meta( string $field = '', int|false $user_id = false )`)[https://developer.wordpress.org/reference/functions/the_author_meta/]
-
-single.php
-
-```php
-// auther url & name
-<strong>
-  Posted by
-  <a href="<?php echo $author_URL; ?>">
-    <?php the_author(); ?>
-  </a>
-</strong>
-
-// author avatar
-<div class="author-image">
-  <?php echo get_avatar($author_ID, 90, '', false, ['class' => 'img-circle']); ?>
-</div>
-
-// get method:
-// nl2br: 줄 바꿈 하기 전에 br를 삽입한다.
-<?php echo nl2br(get_the_author_meta('description')); ?>
-```
-
-### Related Posts using the WP_Query Class
-
-- WP_Query class: query to the database for the posts. (create & executed)
-- Main loops
-  - generated by WordPress / using the `URL` the user is visiting
-  - Done automatically by WordPress behind the scences.
-- Secondary loops
-  - created by you / using `WP_Query` class
-  - Can query any/mutiple types of posts in the database
-- 여러 loop를 사용하는 경우, 사용한 후 초기화 시켜줘야 한다.
-- WP_Query 클래스는 여러 테마, 플러그인에서 사용하므로 주의해서 사용해야 한다.
-
-(`WP_Query`)[https://developer.wordpress.org/reference/classes/wp_query/]
-
-(`WP_Post`)[https://developer.wordpress.org/reference/classes/WP_Post/]
-
-(`wp_reset_postdata()`)[https://developer.wordpress.org/reference/functions/wp_reset_postdata/]
-
-- restores the $post global to the current post in the main query.
-
-(`the_post()`)[https://developer.wordpress.org/reference/functions/the_post/]
-
-- iterate the post index in the loop
-
-WP_Query Class를 사용해야 하는 경우
-
-- A list of related posts undert the current post / ex. all pots in the same category
-- To create two loops on the same page / ex. FAQ page with the question titles at the top and the content beneath
-- To create custom list of current posts in the sidebar or the footer of your site, when the Recent Posts widget doesn't do what you need
-- To create custom queries for taxonomies uding more than one taxonomy to define what's displayed.
-
-WP_Query Class를 사용하면 불편한 경우
-
-- 특정 포스트나 카테고리에 따라 레이아웃 스타일을 다르고 하고 싶은 경우, WP_Query를 사용하는 것 보다 새로운 템플렛을 만들고 loop에서 해당 템플릿을 사용하도록 한다.
-- 기본값보다 많거나 적은 post를 출력하고 싶은 경우, WP_Query 를 사용해서 새로운 query를 만들지 않고. `pre_get_posts`를 사용해서 메인 쿼리를 수정한다. 조건문을 함께 사용할 수 있다.
-
-4 ~ 5 개 이상의 query를 사용해야하는 경우, 차라리 새로운 페이지를 만드는게 좋다.
-
-single.php / Related Posts
-
-```php
-<?php
-  $categories   = get_the_category();
-  // printout data: print_r($categories);
-
-  $rp_query     =   new WP_Query([
-    // how many result
-    'post_per_page'     =>    2,
-    // not include current post
-    'post__not_in'      =>    [$post->ID],
-    // same category // categotries가 존재하는 경우 term_id, 아닌 경우 null
-    'cat'               => !empty($categories) ? $categories[0]->term_id : null
-  ]);
-  // return array of post
-
-  // secondary loop
-  if ($rp_query->have_posts()) {
-    while ($rp_query->have_posts()) {
-      $rp_query->the_post();
-  ?>
-    // thumnail 이 존재한다면
-    <?php if (has_post_thumbnail()) { ?>
-       <a href="<?php get_permalink(); ?>">
-          <?php the_post_thumbnail('thumnail'); ?>
-        </a>
-    <?php
-      }
-    ?>
-    <?php the_permalink(); ?> // 원본 링크
-    <?php echo the_title(); ?> // 제목
-    <?php comments_number('0'); ?> // 댓글 수
-    <?php the_excerpt(); ?> // 내용
-  <?php
-    }
-    // reset $post global varibale
-    // reset secondary loop
-    wp_reset_postdata();
-  }
-  ?>
-</div>
-```
-
-### Page Template (page.php)
-
-- WordPress will load a template called `page.php` for page templates
-- Pages templates tend to be a more minial version of a single post template, but it's completely up to the developer/designer.
-- If you use the main loop multiple times, then you need to reset the loop every time using the `rewind_posts()` function.
-- If you plan on integrating other plugins then it's always good to check if their activated. One way of checking is by using the `function_exists()` function
-
-Page Template Order
-
-1.  Custom Template File
-2.  page-{slug}.php
-3.  page-{id}.php
-4.  _page.php_
-5.  singular.php
-6.  index.php
-
-create loop
-
-```php
-<?php
-  get_header();
-  while( have_posts() ){
-    the_post();
-    ?>
-    <!-- Page Title !-->
-    <section id="page-title">
-      <div class="container clearfix">
-        <h1><?php the_title(); ?></h1>
-        <span>
-          <?php
-            if( function_exists( 'the_subtitle' ){
-              the_subtitle();
-            }
-          ?>
-        </span>
-      </div>
-    </section>
-    <?php
-  }
-?>
-<?php rewind_posts(); ?>
-```
-
-without loop (simple solution)
-
-```php
-<?php get_header(); ?>
-
-<!-- Page Title !-->
-<section id="page-title">
-  <div class="container clearfix">
-    <h1><?php single_post_title(); ?></h1>
-    <span>
-      <?php
-        if( function_exists( 'the_subtitle' ){
-          the_subtitle();
-        }
-      ?>
-    </span>
-  </div>
-</section>
-
-```
-
-`rewind_posts`: Rewind the posts in order to re-use the same query in different locations on a page
-
-Plugin: WP Subtitle
-
-### 404 and Category Template
-
-- 404 / 404.php
-- catetory / category.php
-- search form:` <?php get_search_form(); ?>`
-- a resusable templage: `<?php get_template_part(); ?>`
-
-#### 404.php
-
-404 Template Order
-
-1. 404.php
-2. index.php
-
-```php
-<?php get_header(); ?>
-
-// make it translatable
-// page title
-<h1><?php _e( 'Page Not Found', 'udemy' ); ?></h1>
-// heading
-<h4><?php _e( "Oooops! The Page you were looking for, couldn't be found.", 'udemy' ); ?></h4>
-
-// search form
-<?php get_search_form(); ?> // searchform.php
-
-<?php get_footer(); ?>
-```
-
-Category Template Order
-
-1. category-{slug}.php
-2. _category-{id}.php_
-3. _category.php_
-4. archive.php (Tags, Dates...)
-5. index.php
-
-#### category.php
-
-```php
-<?php get_header(); ?>
-
-// Page title
-<section id="page-title">
-  <div class="container clearfix">
-    <h1><?php the_archive_title(); ?></h1>
-    <span>
-      <?php the_archive_description(); ?>
-    </span>
-  </div>
-</section>
-
-// section
-
-<?php get_footer(); ?>
-
-```
-
-id / slug 에 따른 별도의 템플릿을 적용해야 하는 경우 (taxonomy=category&tag_ID=6)
-
-category-6.php
-
-```php
-<section id="page-title">
-  <div class="container clearfix">
-    <h1><?php the_archive_title(); ?> <em class="text-danger">IMPORTANT</em></h1>
-    <span>
-      <?php the_archive_description(); ?>
-    </span>
-  </div>
-</section>
-
-```
-
-The index template should be loaded only when any other template is not suitable for the job.
-(index 페이지에 의존하는 페이지가 많아 질수록, 웹사이트를 수정하기 힘들어 진다.)
-
-### Date Template
-
-- Date templates are not commonly created, but you may come across them so its good to know how to work with them.
-- The date template is a type of archive template. It can be used for displaying posts within a certain year, month or day.
-- WordPress doesn't provide much flexibility with this template. You'll need to use conditional tags to render date specific content.
-
-Date Order Template
-
-1. date.php
-2. archive.php
-3. index.php
-
-date.php
-
-```php
-// copy from category template
-// the_archive_description ->
-<span>
-<?php
-  if( is_year() ){
-    ?>You are viewing a year archive.<?php
-  } else if( is_month() ){
-    ?>You are viewing a month archive.<?php
-  } else if( is_day() ){
-    ?>You are viewing a day archive.<?php
-  }
-?>
-</span>
-```
-
-한계: 선택된 날짜에 post가 없으면 404 템플릿이 출력된다.
-
-### 30 Attachment Templates
-
-- Attachments are what WordPress calls the images, videos, and any other files you uploaded on your site through the media uploader
-- If you create an attachment template, then you're responsible for displaying the attachment
-- The _post_ varialbe contains information about the attachments such as the full HTTP URL.
-- Mine types specify what kind of file you're dealing with
-
-#### What are mime types?
-
-- A mine type is a way for a program/browser to identify what kind of file is being loaded.
-- Similar to extensions.
-- Stored internally.
-
-#### Attachment Template order
-
-1. {Mine-type}.php
-2. attachment.php
-3. sinle-attachment-{slug}.php
-4. single.php
-5. singular.php
-6. index.php
-
-#### attachment.php
-
-```php
-// copy from single.php
-// title / content / comment
-<a href="<?php echo $post->guid; ?>">Direct Dowload</a>
-<?php
-  // echo "<pre";
-  // print_r( $post );
-  // echo "</pre";
-  // $post->post_type
-  // $post->post_min_type
-  // $post->guid
-  the_content();
-?>
-```
-
-#### image.php
-
-```php
-// copy from attachment.php
-<img src="<?php echo $post->guid; ?>" alt="" class="img-responsive"/>
-```
-
-### Search and Custom Template
-
-- The _search.php_ file is for search templates. It's important that you provibe a form with the searched term.
-- Custom template files allow you to give users the choice to choose different template designs.
-- You can name your templates whatever you want. It's best to keep the names short and concise.
-- Custom templates can be applied to multiple post types. This is a new featured in versions 4.7 and above.
-
-#### search.php
-
-```php
-// page title
-<section id="page-title">
-  <h1><?php _e('Search Results for:', 'udemy'); ?> <?php the_search_query(); ?></h1>
-</section>
-// search box
-<div>
-  <div><?php _e('What are you searching for today?', 'udemy'); ?></div>
-  <div><?php get_search_form(); ?></div>
-</div>
-```
-
-#### full-width-page.php
-
-post type: page
-
-```php
-<?php
-/*
-* Template Name: Full Width Page
-*/
-?>
-
-// copy from page.php
-// remove sidebar
-```
-
-Creating page templates for specific post types
-
-- 기본적으로 페이지에서만 커스텀 템플릿을 사용할 수 있다.
-- 템플릿의 블록 주석에 타입을 설정하면, 다른 포스트 타입도 커스텀 템플릿을 선택 할 수 있다.
-- WP 4.7+
-
-```php
-<?php
-/*
-* Template Name: Full Width Page
-* Template Post Type: post, page, event
-*/
-?>
-```
-
-#### full-width-post.php
-
-```php
-// copy from single.php
-<?php
-/*
-* Template Name: Full Width Post
-* Template Post Type: post
-*/
-get_header();
-?>
-```
-
-### Completing the Header, Title and Ad sections
-
-## 04 Theme Template

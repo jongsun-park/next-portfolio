@@ -64,6 +64,7 @@ export const Blog = ({ allPostsData }) => {
 };
 
 const BlogContainer = styled(Container)`
+  overflow: hidden;
   .swiper-container {
     overflow: visible;
   }
